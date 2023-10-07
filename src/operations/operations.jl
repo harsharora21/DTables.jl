@@ -33,7 +33,9 @@ function map(f, d::DTable)
         end
     end
     chunks = map(c -> Dagger.spawn(chunk_wrap, c, f), d.chunks)
-    return DTable(chunks, d.tabletype)
+    out = DTable(chunks, d.tabletype)
+    out.chunk_lengths = d.chunk_lengths
+    return out
 end
 
 """
